@@ -1,4 +1,4 @@
-﻿using System.Web;
+﻿using BearerAuthentication;
 using System.Web.Mvc;
 
 namespace MusicHubAPI
@@ -8,6 +8,11 @@ namespace MusicHubAPI
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+        }
+
+        public static void RegisterWebApiFilters(System.Web.Http.Filters.HttpFilterCollection filters)
+        {
+            filters.Add(new BearerAuthenticationFilter());
         }
     }
 }
