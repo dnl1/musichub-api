@@ -15,9 +15,7 @@ namespace MusicHubAPI.ViewModels
         {
             MusicianBusiness musicianBusiness = new MusicianBusiness();
 
-            Musician musician = this;
-
-            var retorno = musicianBusiness.Create(musician);
+            var retorno = musicianBusiness.Create(this);
 
             return retorno;
         }
