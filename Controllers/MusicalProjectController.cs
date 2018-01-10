@@ -12,13 +12,12 @@ namespace MusicHubAPI.Controllers
     public class MusicalProjectController : RestfulApiController
     {
         [HttpPost]
-        [ActionName("")]
-        public IHttpActionResult Create([FromBody] MusicalProjectModel model)
+        public IHttpActionResult Create([FromBody] MusicalProjectModel musical_project)
         {
             MusicalProject musicalProject = null;
             try
             {
-                musicalProject = model.Create();
+                musicalProject = musical_project.Create();
             }
             catch(ValidateException ex)
             {
@@ -31,7 +30,5 @@ namespace MusicHubAPI.Controllers
 
             return Created("api", musicalProject);
         }
-
-
     }
 }

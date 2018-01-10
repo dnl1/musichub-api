@@ -28,11 +28,5 @@ namespace MusicHubAPI.Controllers
 
             return Ok();
         }
-
-        [HttpGet]
-        public IHttpActionResult TestMe()
-        {
-            return Ok();
-        }
     }
 }

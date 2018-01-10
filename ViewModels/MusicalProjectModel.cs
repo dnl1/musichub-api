@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BearerAuthentication;
 using MusicHubBusiness.Business;
 using MusicHubBusiness.Models;
+using System.Web;
 
 namespace MusicHubAPI.ViewModels
 {
     public class MusicalProjectModel : MusicalProject
     {
-        public string confirmation_password { get; set; }
-
         internal MusicalProject Create()
         {
             MusicalProjectBusiness musicalProjectBusiness = new MusicalProjectBusiness();
+
+            BearerToken bearerToken = new BearerToken();
+            var token = bearerToken.GetActiveToken();
+
+            this.owner_id = int.Parse(token.client);    
 
             var retorno = musicalProjectBusiness.Create(this);
 
