@@ -2,6 +2,7 @@
 using MusicHubBusiness;
 using MusicHubBusiness.Models;
 using System;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 
@@ -10,21 +11,13 @@ namespace MusicHubAPI.Controllers
     public class ContributionController : RestfulApiController
     {
         [HttpPost]
-        public IHttpActionResult Create(ContributionModel contributionModel, bool baseInstrument = false)
+        public IHttpActionResult Create(ContributionModel contributionModel)
         {
             Contribution contribution = null;
 
             try
             {
-                var httpRequest = HttpContext.Current.Request;
-                if (httpRequest.Files.Count < 1)
-                {
-                    return BadRequest();
-                }
-
-                var postedFile = httpRequest.Files[0];
-
-                contribution = contributionModel.Create(baseInstrument, postedFile);
+                contribution = contributionModel.Create();
             }
             catch (ValidateException ex)
             {
