@@ -5,6 +5,7 @@ using MusicHubBusiness.Enum;
 using MusicHubBusiness.Models;
 using MusicHubBusiness.Repository;
 using System;
+using System.Collections.Generic;
 
 namespace MusicHubAPI.ViewModels
 {
@@ -12,10 +13,8 @@ namespace MusicHubAPI.ViewModels
     {
         public int instrument_id { get; set; }
         public string song_base64 { get; set; }
-        private bool _base_instrument = false;
-        public bool base_instrument { get { return _base_instrument; } set { _base_instrument = value; } }
-        private eContributionType _contribution_type_id = eContributionType.PrivateContribution;
-        public eContributionType contribution_type_id { get { return _contribution_type_id; } set { _contribution_type_id = value; } }
+        public bool base_instrument { get; set; } = true;
+        public eContributionType contribution_type_id { get; set; } = eContributionType.PrivateContribution;
 
         private FileArchive song;
 
@@ -71,9 +70,15 @@ namespace MusicHubAPI.ViewModels
             return retorno;
         }
 
+        internal IEnumerable<Contribution> GetFreeContributions(int id)
+        {
+            ContributionBusiness contributionBusiness = new ContributionBusiness();
+            return contributionBusiness.GetFreeContributions(id);
+        }
+
         private void FileHandling(AudioHelper audioConverter)
         {
-             song = new FileArchive(song_base64);
+            song = new FileArchive(song_base64);
 
             if (song.ContentLength == 0)
                 throw new Exception("O áudio recebido pelo nosso sistema está corrompido...");

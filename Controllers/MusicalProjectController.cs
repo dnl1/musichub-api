@@ -19,16 +19,59 @@ namespace MusicHubAPI.Controllers
             {
                 musicalProject = musical_project.Create();
             }
-            catch(ValidateException ex)
+            catch (ValidateException ex)
             {
                 return UnprocessableEntity(ex.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
 
             return Created("api", musicalProject);
+        }
+
+        public struct SearchByMusicalGenreObj {
+            public int musical_genre_id { get; set; }
+        }
+
+        [HttpPost]
+        public IHttpActionResult SearchByMusicalGenre([FromBody] SearchByMusicalGenreObj obj)
+        {
+            IEnumerable<MusicalProject> projects = new List<MusicalProject>();
+
+            try
+            {
+                MusicalProjectModel model = new MusicalProjectModel();
+                projects = model.SearchByMusicalGenre(obj.musical_genre_id);
+            }
+            catch (ValidateException ex)
+            {
+                return UnprocessableEntity(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(projects);
+        }
+
+        [HttpGet]
+        public IHttpActionResult Musicians(int id)
+        {
+            IEnumerable<Musician> musicians = null;
+            try
+            {
+                MusicalProjectModel model = new MusicalProjectModel();
+                musicians = model.Musicians(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(musicians);
         }
     }
 }

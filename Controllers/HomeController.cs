@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace MusicHubAPI.Controllers
 {

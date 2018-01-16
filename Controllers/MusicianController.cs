@@ -13,14 +13,11 @@ namespace MusicHubAPI.Controllers
     {
         [HttpPost]
         [AllowAnonymous]
-        [ActionName("")]
         public IHttpActionResult Create([FromBody] MusicianModel model)
         {
             Musician musician = null;
             try
             {
-                if (model.password != model.confirmation_password) throw new Exception("Senhas não coincidem");
-
                 musician = model.Create();
             }
             catch(ValidateException ex)
@@ -35,6 +32,22 @@ namespace MusicHubAPI.Controllers
             return Created("api", musician);
         }
 
+        [HttpPost]
+        public IHttpActionResult SearchByName(string name)
+        {
+            IEnumerable<Musician> musicians = null;
+            try
+            {
+                MusicianModel model = new MusicianModel();
+                musicians = model.SearchByName(name);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Created("api", musicians);
+        }
 
     }
 }

@@ -1,6 +1,9 @@
 ﻿using BearerAuthentication;
 using MusicHubBusiness.Business;
 using MusicHubBusiness.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 
 namespace MusicHubAPI.ViewModels
@@ -19,6 +22,18 @@ namespace MusicHubAPI.ViewModels
             var retorno = musicalProjectBusiness.Create(this);
 
             return retorno;
+        }
+
+        internal IEnumerable<MusicalProject> SearchByMusicalGenre(int musical_genre_id)
+        {
+            MusicalProjectBusiness musicalProjectBusiness = new MusicalProjectBusiness();
+            return musicalProjectBusiness.SearchByMusicalGenre(musical_genre_id);
+        }
+
+        internal IEnumerable<Musician> Musicians(int musical_project_id)
+        {
+            ContributionBusiness contributionBusiness = new ContributionBusiness();
+            return contributionBusiness.GetByMusicalProjectId(musical_project_id);
         }
     }
 }
