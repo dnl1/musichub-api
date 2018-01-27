@@ -26,7 +26,7 @@ namespace MusicHubAPI.Controllers
             BearerToken bearerLogin = new BearerToken();
             bearerLogin.GenerateHeaderToken(user.id.ToString(), user.email);
 
-            return Ok();
+            return Ok(user);
         }
     }
 }

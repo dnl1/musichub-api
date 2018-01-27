@@ -34,7 +34,7 @@ namespace MusicHubAPI.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetContributions(int id)
+        public IHttpActionResult FreeContributions(int id)
         {
             IEnumerable<Contribution> contributions = null;
             ContributionModel model = new ContributionModel();
