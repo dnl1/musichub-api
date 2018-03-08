@@ -9,7 +9,8 @@ namespace MusicHubAPI.Controllers
     public class MusicalGenreController : RestfulApiController
     {
         // GET: MusicalGenre
-        [ActionName("")]
+        [HttpPost]
+        [Route("musicalgenre")]
         public IHttpActionResult GetAll()
         {
             IEnumerable<MusicalGenre> retorno = null;

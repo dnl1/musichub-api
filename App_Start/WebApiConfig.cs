@@ -19,16 +19,17 @@ namespace MusicHubAPI
             config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(
+                name: "ControllerIdApi",
+                routeTemplate: "{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "ControllerActionId",
                 routeTemplate: "{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.Routes.MapHttpRoute(
-                name: "ControllerIdApi",
-                routeTemplate: "{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
 
         }
     }

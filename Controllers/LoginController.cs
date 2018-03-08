@@ -23,10 +23,16 @@ namespace MusicHubAPI.Controllers
 
             if (user == null) return Unauthorized();
 
-            BearerToken bearerLogin = new BearerToken();
+            BearerToken bearerLogin = new BearerToken(new BearerDatabaseManager(model.email));
             bearerLogin.GenerateHeaderToken(user.id.ToString(), user.email);
 
             return Ok(user);
+        }
+
+        [HttpPut]
+        public IHttpActionResult Teste()
+        {
+            return Ok();
         }
     }
 }

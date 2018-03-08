@@ -32,6 +32,26 @@ namespace MusicHubAPI.Controllers
             return Created("api", musician);
         }
 
+        [HttpPut]
+        public IHttpActionResult Update([FromUri] int id, [FromBody] MusicianModel model)
+        {
+            Musician musician = null;
+            try
+            {
+                musician = model.Update(id);
+            }
+            catch (ValidateException ex)
+            {
+                return UnprocessableEntity(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(musician);
+        }
+
         [HttpPost]
         public IHttpActionResult SearchByName(string name)
         {

@@ -10,13 +10,17 @@ namespace MusicHubAPI.ViewModels
 {
     public class MusicianModel:Musician
     {
+        public MusicianModel()
+        {
+            musicianBusiness = new MusicianBusiness();
+        }
+
+        private MusicianBusiness musicianBusiness;
         public string confirmation_password { get; set; }
 
         internal Musician Create()
         {
             if (password != confirmation_password) throw new ValidateException("Senhas não coincidem");
-
-            MusicianBusiness musicianBusiness = new MusicianBusiness();
 
             var retorno = musicianBusiness.Create(this);
 
@@ -25,8 +29,16 @@ namespace MusicHubAPI.ViewModels
 
         internal IEnumerable<Musician> SearchByName(string name)
         {
-            MusicianBusiness musicianBusiness = new MusicianBusiness();
             IEnumerable<Musician> retorno = musicianBusiness.SearchByName(name);
+
+            return retorno;
+        }
+
+        internal Musician Update(int id)
+        {
+            this.id = id;
+
+            Musician retorno = musicianBusiness.Update(this);
 
             return retorno;
         }

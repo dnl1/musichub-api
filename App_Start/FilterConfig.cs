@@ -12,7 +12,7 @@ namespace MusicHubAPI
 
         public static void RegisterWebApiFilters(System.Web.Http.Filters.HttpFilterCollection filters)
         {
-            filters.Add(new BearerAuthenticationFilter());
+            filters.Add(new BearerAuthenticationFilter(new BearerDatabaseManager()));
         }
     }
 }

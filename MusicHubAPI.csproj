@@ -153,8 +153,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Bearer\BearerDatabaseManager.cs" />
     <Compile Include="Controllers\ContributionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -208,11 +208,11 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BearerAuthentication\BearerAuthentication.csproj">
-      <Project>{7F622A3E-2AA1-48BC-8C90-E129FDBFAD01}</Project>
+    <ProjectReference Include="..\bearer-authentication\BearerAuthentication.csproj">
+      <Project>{7f622a3e-2aa1-48bc-8c90-e129fdbfad01}</Project>
       <Name>BearerAuthentication</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MusicHubBusiness\MusicHubBusiness.csproj">
+    <ProjectReference Include="..\musichub-business\MusicHubBusiness.csproj">
       <Project>{54099567-345E-4299-AF39-9A27BDD6D368}</Project>
       <Name>MusicHubBusiness</Name>
     </ProjectReference>
