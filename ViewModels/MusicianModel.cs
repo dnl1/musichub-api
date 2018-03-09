@@ -38,6 +38,12 @@ namespace MusicHubAPI.ViewModels
         {
             this.id = id;
 
+            if(string.IsNullOrEmpty(this.password) && string.IsNullOrEmpty(this.confirmation_password))
+            {
+                Musician tempMusician = musicianBusiness.Get(id);
+                this.password = tempMusician.password;
+            }
+            
             Musician retorno = musicianBusiness.Update(this);
 
             return retorno;
