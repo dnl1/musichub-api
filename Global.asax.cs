@@ -17,11 +17,5 @@ namespace MusicHubAPI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             FilterConfig.RegisterWebApiFilters(GlobalConfiguration.Configuration.Filters);
         }
-
-        protected void Application_PostAuthorizeRequest()
-        {
-            HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
-        }
-
     }
 }
