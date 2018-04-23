@@ -12,6 +12,7 @@ namespace MusicHubAPI.Controllers
     public class MusicalProjectController : RestfulApiController
     {
         [HttpPost]
+        [Route("musicalproject/create")]
         public IHttpActionResult Create([FromBody] MusicalProjectModel musical_project)
         {
             MusicalProject musicalProject = null;
@@ -29,6 +30,25 @@ namespace MusicHubAPI.Controllers
             }
 
             return Created("api", musicalProject);
+        }
+
+        [HttpGet]
+        [Route("musicalproject/my-projects")]
+        public IHttpActionResult MyProjects()
+        {
+            IEnumerable<MusicalProject> projects = new List<MusicalProject>();
+
+            try
+            {
+                MusicalProjectModel model = new MusicalProjectModel();
+                projects = model.MyProjects();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(projects);
         }
 
         public struct SearchByMusicalGenreObj {

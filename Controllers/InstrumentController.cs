@@ -2,6 +2,7 @@
 using MusicHubBusiness.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 
 namespace MusicHubAPI.Controllers
@@ -17,6 +18,10 @@ namespace MusicHubAPI.Controllers
             {
                 InstrumentBusiness instrumentBusiness = new InstrumentBusiness();
                 retorno = instrumentBusiness.GetAll();
+
+                int[] available_instruments = new int[] { 1, 5 };
+
+                retorno = retorno.Where(i => available_instruments.Contains(i.id));
             }
             catch (Exception ex)
             {
