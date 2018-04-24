@@ -56,6 +56,7 @@ namespace MusicHubAPI.Controllers
         }
 
         [HttpPost]
+        [Route("musicalproject/search-by-musical-genre")]
         public IHttpActionResult SearchByMusicalGenre([FromBody] SearchByMusicalGenreObj obj)
         {
             IEnumerable<MusicalProject> projects = new List<MusicalProject>();
