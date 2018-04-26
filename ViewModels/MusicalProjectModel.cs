@@ -48,22 +48,65 @@ namespace MusicHubAPI.ViewModels
             string audioPath = string.Empty;
             int idBaseMusicalProjectInstrument = baseMusicalProjectInstrument.id;
 
-            if (instruments.Any(i => i == (int)EInstruments.Lead_Guitar || i == (int)EInstruments.Rhythm_Guitar))
+            ContributionModel contributionModel = new ContributionModel()
             {
-                audioPath = Path.Combine(baseDirectory, "PlaceholderAudio\\guitar.mp3");
-            }
-            else if (instruments.Any(i => i == (int)EInstruments.Piano))
-            {
-                audioPath = Path.Combine(baseDirectory, "PlaceholderAudio\\synth.mp3");
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+                instrument_id = baseMusicalProjectInstrument.instrument_id,
+                base_instrument = true,
+                musical_project_id = retorno.id,
+                musical_genre_id = retorno.musical_genre_id,
+                musician_id = Utitilities.GetLoggedUserId(),
+            };
 
-            string folderSave = Path.Combine(baseDirectory, "UploadedAudios");
+            contributionModel.Create();
 
-            musicalProjectInstrumentBusiness.SaveAudio(audioPath, folderSave, idBaseMusicalProjectInstrument);
+            //if (instruments.Any(i => i == (int)EInstruments.Lead_Guitar || i == (int)EInstruments.Rhythm_Guitar))
+            //{
+            //    audioPath = Path.Combine(baseDirectory, "PlaceholderAudio\\guitar.mp3");
+            //}
+            //else if (instruments.Any(i => i == (int)EInstruments.Piano))
+            //{
+            //    audioPath = Path.Combine(baseDirectory, "PlaceholderAudio\\synth.mp3");
+            //}
+            //else
+            //{
+            //    throw new NotImplementedException();
+            //}
+
+            //string folderSave = Path.Combine(baseDirectory, "UploadedAudios");
+
+            //musicalProjectInstrumentBusiness.SaveAudio(audioPath, folderSave, idBaseMusicalProjectInstrument);
+
+            return retorno;
+        }
+
+        internal IEnumerable<Contribution> Contributions(int musicalProjectId, int instrumentId)
+        {
+            ContributionBusiness contributionBusiness = new ContributionBusiness();
+            IEnumerable<Contribution> contributions = contributionBusiness.GetByMusicalProjectAndIntrument(musicalProjectId, instrumentId);
+
+            return contributions;
+        }
+
+        internal IEnumerable<Contribution> Contributions(int musicalProjectId)
+        {
+            ContributionBusiness contributionBusiness = new ContributionBusiness();
+            IEnumerable<Contribution> contributions = contributionBusiness.GetByMusicalProjectId(musicalProjectId);
+
+            return contributions;
+        }
+
+        internal IEnumerable<MusicalProjectInstrument> Instruments(int musicalProjectId)
+        {
+            MusicalProjectInstrumentBusiness musicalProjectInstrumentBusiness = new MusicalProjectInstrumentBusiness();
+            IEnumerable<MusicalProjectInstrument> retorno = musicalProjectInstrumentBusiness.GetByMusicalProject(musicalProjectId);
+
+            return retorno;
+        }
+
+        internal MusicalProject Get(int id)
+        {
+            MusicalProjectBusiness musicalProjectBusiness = new MusicalProjectBusiness();
+            MusicalProject retorno = musicalProjectBusiness.Get(id);
 
             return retorno;
         }
@@ -87,7 +130,7 @@ namespace MusicHubAPI.ViewModels
 
         internal IEnumerable<Musician> Musicians(int musical_project_id)
         {
-            ContributionBusiness contributionBusiness = new ContributionBusiness();
+            MusicianBusiness contributionBusiness = new MusicianBusiness();
             return contributionBusiness.GetByMusicalProjectId(musical_project_id);
         }
     }

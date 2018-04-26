@@ -33,6 +33,82 @@ namespace MusicHubAPI.Controllers
         }
 
         [HttpGet]
+        [Route("musicalproject/{id}")]
+        public IHttpActionResult Get([FromUri] int id)
+        {
+            MusicalProject project = null;
+
+            try
+            {
+                MusicalProjectModel model = new MusicalProjectModel();
+                project = model.Get(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(project);
+        }
+
+        [HttpGet]
+        [Route("musicalproject/{musicalProjectId}/instruments")]
+        public IHttpActionResult Instruments(int musicalProjectId)
+        {
+            IEnumerable<MusicalProjectInstrument> instruments = null;
+
+            try
+            {
+                MusicalProjectModel model = new MusicalProjectModel();
+                instruments = model.Instruments(musicalProjectId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(instruments);
+        }
+
+        [HttpGet]
+        [Route("musicalproject/{musicalProjectId}/contributions")]
+        public IHttpActionResult Contributions(int musicalProjectId)
+        {
+            IEnumerable<Contribution> contributions = null;
+
+            try
+            {
+                MusicalProjectModel model = new MusicalProjectModel();
+                contributions = model.Contributions(musicalProjectId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(contributions);
+        }
+
+        [HttpGet]
+        [Route("musicalproject/{musicalProjectId}/contributions/{instrumentId}")]
+        public IHttpActionResult Contributions(int musicalProjectId, int instrumentId)
+        {
+            IEnumerable<Contribution> contributions = null;
+
+            try
+            {
+                MusicalProjectModel model = new MusicalProjectModel();
+                contributions = model.Contributions(musicalProjectId, instrumentId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(contributions);
+        }
+
+        [HttpGet]
         [Route("musicalproject/my-projects")]
         public IHttpActionResult MyProjects()
         {
@@ -79,6 +155,7 @@ namespace MusicHubAPI.Controllers
         }
 
         [HttpGet]
+        [Route("musicalproject/{id}/musicians")]
         public IHttpActionResult Musicians(int id)
         {
             IEnumerable<Musician> musicians = null;

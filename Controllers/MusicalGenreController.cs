@@ -26,5 +26,23 @@ namespace MusicHubAPI.Controllers
 
             return Ok(retorno);
         }
+
+        [HttpGet]
+        public IHttpActionResult Get([FromUri] int id)
+        {
+            MusicalGenre retorno = null;
+
+            try
+            {
+                MusicalGenreBusiness musicalGenreBusiness = new MusicalGenreBusiness();
+                retorno = musicalGenreBusiness.Get(id);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(retorno);
+        }
     }
 }

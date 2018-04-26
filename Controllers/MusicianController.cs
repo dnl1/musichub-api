@@ -3,8 +3,6 @@ using MusicHubBusiness;
 using MusicHubBusiness.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 
 namespace MusicHubAPI.Controllers
@@ -20,11 +18,11 @@ namespace MusicHubAPI.Controllers
             {
                 musician = model.Create();
             }
-            catch(ValidateException ex)
+            catch (ValidateException ex)
             {
                 return UnprocessableEntity(ex.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -50,7 +48,24 @@ namespace MusicHubAPI.Controllers
                 return BadRequest(ex.Message);
             }
 
-            return Created("api", musicians);
+            return Ok(musicians);
+        }
+
+        [HttpGet]
+        public IHttpActionResult Get([FromUri] int id)
+        {
+            Musician musician = null;
+            MusicianModel model = new MusicianModel();
+            try
+            {
+                musician = model.Get(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(musician);
         }
 
         [HttpPut]
@@ -89,6 +104,5 @@ namespace MusicHubAPI.Controllers
 
             return Created("api", musicians);
         }
-
     }
 }

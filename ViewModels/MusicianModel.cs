@@ -54,5 +54,11 @@ namespace MusicHubAPI.ViewModels
             IEnumerable<Musician> retorno = musicianBusiness.GetAll();
             return retorno;
         }
+
+        internal Musician Get(int id)
+        {
+            Musician retorno = musicianBusiness.Get(id);
+            return retorno;
+        }
     }
 }

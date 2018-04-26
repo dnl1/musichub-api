@@ -30,5 +30,22 @@ namespace MusicHubAPI.Controllers
 
             return Created("api", rateMusician);
         }
+
+        [HttpGet]
+        public IHttpActionResult Get([FromUri] int id)
+        {
+            RateMusician rateMusician = null;
+            RateMusicianModel rateMusicianModel = new RateMusicianModel();
+            try
+            {
+                rateMusician = rateMusicianModel.GetByOwnerId(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(rateMusician);
+        }
     }
 }
