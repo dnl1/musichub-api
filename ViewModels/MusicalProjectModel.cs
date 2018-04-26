@@ -1,5 +1,6 @@
 ﻿using MusicHubAPI.Enum;
 using MusicHubBusiness;
+using MusicHubBusiness.Audio;
 using MusicHubBusiness.Business;
 using MusicHubBusiness.Models;
 using System;
@@ -77,6 +78,34 @@ namespace MusicHubAPI.ViewModels
             //musicalProjectInstrumentBusiness.SaveAudio(audioPath, folderSave, idBaseMusicalProjectInstrument);
 
             return retorno;
+        }
+
+        internal MemoryStream Download(int id)
+        {
+            string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ProjectsAudio", $"{id}.mp3");
+
+            byte[] bytes = File.ReadAllBytes(file);
+            MemoryStream stream = new MemoryStream(bytes, 0, bytes.Length, true, true);
+
+            return stream;
+        }
+
+        internal void Finish(int id)
+        {
+            MusicalProjectBusiness musicalProjectBusiness = new MusicalProjectBusiness();
+            musicalProjectBusiness.Finish(id);
+
+            var contributions = Contributions(id).ToList();
+            List<string> files = new List<string>();
+
+            for (int i = 0; i < contributions.Count; i++)
+            {
+                files.Add(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UploadedAudios", $"{contributions[i].id}.mp3"));
+            }
+
+            string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ProjectsAudio");
+
+            AudioHelper.CreateMashup(id, folder, files.ToArray());
         }
 
         internal IEnumerable<Contribution> Contributions(int musicalProjectId, int instrumentId)
