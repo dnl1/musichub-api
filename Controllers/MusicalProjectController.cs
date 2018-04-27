@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
@@ -73,22 +74,30 @@ namespace MusicHubAPI.Controllers
 
         [Route("musicalproject/{id}/download")]
         [HttpGet]
-        public IHttpActionResult Download([FromUri] int id)
+        public HttpResponseMessage Download([FromUri] int id)
         {
+            HttpResponseMessage result = null;
+
             try
             {
                 MusicalProjectModel model = new MusicalProjectModel();
                 MemoryStream stream = model.Download(id);
 
                 var content = new StreamContent(stream);
-                content.Headers.ContentType = new MediaTypeHeaderValue("audio/mpeg3");
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 content.Headers.ContentLength = stream.GetBuffer().Length;
-                return Ok(content);
+
+                result = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = content
+                };
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                result = new HttpResponseMessage(HttpStatusCode.BadRequest);
             }
+
+            return result;
         }
 
         [HttpGet]
@@ -161,7 +170,7 @@ namespace MusicHubAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ex.Message+ex.StackTrace);
             }
 
             return Ok(projects);
