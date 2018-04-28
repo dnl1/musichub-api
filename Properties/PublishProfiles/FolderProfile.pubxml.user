@@ -70,10 +70,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2012 11:48:56</publishTime>
     </File>
     <File Include="bin/MusicHubAPI.dll">
-      <publishTime>04/27/2018 17:14:14</publishTime>
+      <publishTime>04/28/2018 16:11:01</publishTime>
     </File>
     <File Include="bin/MusicHubAPI.pdb">
-      <publishTime>04/27/2018 17:14:14</publishTime>
+      <publishTime>04/28/2018 16:11:01</publishTime>
     </File>
     <File Include="bin/MusicHubBusiness.dll">
       <publishTime>04/27/2018 15:06:33</publishTime>
@@ -307,7 +307,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2018 08:45:09</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/27/2018 15:06:37</publishTime>
+      <publishTime>04/28/2018 16:07:50</publishTime>
     </File>
   </ItemGroup>
 </Project>

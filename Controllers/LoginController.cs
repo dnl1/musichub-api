@@ -3,10 +3,6 @@ using MusicHubAPI.ViewModels;
 using MusicHubBusiness.Business;
 using MusicHubBusiness.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace MusicHubAPI.Controllers
@@ -17,16 +13,25 @@ namespace MusicHubAPI.Controllers
         [AllowAnonymous]
         public IHttpActionResult Index(LoginModel model)
         {
-            MusicianBusiness musicianBusiness = new MusicianBusiness();
+            try
+            {
+                MusicianBusiness musicianBusiness = new MusicianBusiness();
 
-            Musician user = musicianBusiness.Login(model.email, model.password);
+                Musician user = musicianBusiness.Login(model.email, model.password);
 
-            if (user == null) return Unauthorized();
+                if (user == null) return Unauthorized();
 
-            BearerToken bearerLogin = new BearerToken(new BearerDatabaseManager(model.email));
-            bearerLogin.GenerateHeaderToken(user.id.ToString(), user.email);
+                BearerToken bearerLogin = new BearerToken(new BearerDatabaseManager(model.email));
+                bearerLogin.GenerateHeaderToken(user.id.ToString(), user.email);
 
-            return Ok(user);
+                return Ok(user);
+
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.StackTrace);
+                return InternalServerError(ex);
+            }
         }
 
         [HttpPut]
