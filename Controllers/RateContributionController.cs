@@ -30,5 +30,22 @@ namespace MusicHubAPI.Controllers
 
             return Created("api", rateContribution);
         }
+
+        [HttpGet]
+        public IHttpActionResult Get([FromUri] int id)
+        {
+            RateContribution rateContribution = null;
+            RateContributionModel rateContributionModel = new RateContributionModel();
+            try
+            {
+                rateContribution = rateContributionModel.GetByUserAndProjectId(musicalProjectId: id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(rateContribution);
+        }
     }
 }

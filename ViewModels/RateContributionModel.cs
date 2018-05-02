@@ -1,4 +1,5 @@
-﻿using MusicHubBusiness.Business;
+﻿using System;
+using MusicHubBusiness.Business;
 using MusicHubBusiness.Models;
 
 namespace MusicHubAPI.ViewModels
@@ -12,6 +13,11 @@ namespace MusicHubAPI.ViewModels
             var retorno = rateContributionBusiness.Create(this);
 
             return retorno;
+        }
+
+        internal RateContribution GetByUserAndProjectId(int musicalProjectId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -90,6 +90,16 @@ namespace MusicHubAPI.ViewModels
             return retorno;
         }
 
+        internal MemoryStream Download(int id)
+        {
+            string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UploadedAudios", $"{id}.mp3");
+
+            byte[] bytes = File.ReadAllBytes(file);
+            MemoryStream stream = new MemoryStream(bytes, 0, bytes.Length, true, true);
+
+            return stream;
+        }
+
         internal void Approve(int contributionId)
         {
             ContributionBusiness contributionBusiness = new ContributionBusiness();

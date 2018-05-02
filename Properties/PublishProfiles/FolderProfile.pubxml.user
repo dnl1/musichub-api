@@ -70,19 +70,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2012 11:48:56</publishTime>
     </File>
     <File Include="bin/MusicHubAPI.dll">
-      <publishTime>04/28/2018 16:11:01</publishTime>
+      <publishTime>05/02/2018 11:46:30</publishTime>
     </File>
     <File Include="bin/MusicHubAPI.pdb">
-      <publishTime>04/28/2018 16:11:01</publishTime>
+      <publishTime>05/02/2018 11:46:30</publishTime>
     </File>
     <File Include="bin/MusicHubBusiness.dll">
-      <publishTime>04/27/2018 15:06:33</publishTime>
+      <publishTime>05/02/2018 11:46:24</publishTime>
     </File>
     <File Include="bin/MusicHubBusiness.dll.config">
       <publishTime>02/19/2018 08:46:24</publishTime>
     </File>
     <File Include="bin/MusicHubBusiness.pdb">
-      <publishTime>04/27/2018 15:06:33</publishTime>
+      <publishTime>05/02/2018 11:46:24</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>12/03/2017 14:21:42</publishTime>
