@@ -17,7 +17,12 @@ namespace MusicHubAPI.ViewModels
 
         internal RateContribution GetByUserAndProjectId(int musicalProjectId)
         {
-            throw new NotImplementedException();
+            int userId = Utitilities.GetLoggedUserId();
+
+            //TODO
+            RateContribution retorno = new RateContribution();// _rateContributionBusiness.GetByUserAndProjectId(musicalProjectId, userId);
+
+            return retorno;
         }
     }
 }
